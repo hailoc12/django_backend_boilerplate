@@ -52,7 +52,7 @@ function AppAppBar(props) {
               color="inherit"
               className={classes.title}
             >
-              {"onepirate"}
+              {"Vẽ minh họa bằng tiếng Việt"}
             </Typography>
           </Link>
           <div className={classes.right}>
@@ -63,7 +63,7 @@ function AppAppBar(props) {
                 underline="none"
                 className={classes.rightLink}
               >
-                {"Sign In"}
+                {"Đăng nhập"}
               </Typography>
             </Link>
             <Link to={"/signup"}>
@@ -72,7 +72,7 @@ function AppAppBar(props) {
               underline="none"
               className={clsx(classes.rightLink, classes.linkSecondary)}
             >
-              {"Sign Up"}
+              {"Đăng ký"}
             </Typography>
             </Link>
           </div>

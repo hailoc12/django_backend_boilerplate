@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../components/Button';
+import { TextField } from '@material-ui/core';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 import { Link } from "react-router-dom";
+import "./styles.css"
+import { InputAdornment } from '@material-ui/core';
 
-const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
+
+const backgroundImage = 'https://metaphysic.ai/wp-content/uploads/2022/09/ARTICLE_montage-stable-diffusion.jpg';
 
 const styles = (theme) => ({
   background: {
@@ -36,13 +39,23 @@ function ProductHero(props) {
   return (
     <ProductHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+      {/* <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" /> */}
+      {/* <Typography color="inherit" align="center" variant="h2" marked="center"> */}
+
+      <Typography color="inherit" align="center" variant="h2">
+        Ứng dụng Trí tuệ nhân tạo vẽ tranh minh họa theo cách dễ dàng nhất
       </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
-      </Typography>
+
+      <TextField
+        className='inputRounded'
+        color="inherit"
+        placeholder="Một chú gà đang đi trong sân trong một ngày nắng đẹp"
+        variant="outlined"
+        InputProps={{
+          startAdornment: <InputAdornment position="start">Tôi muốn vẽ: </InputAdornment>,
+        }}
+      />
+
       <Link to={"/signup"}>
       <Button
         color="secondary"
@@ -51,11 +64,11 @@ function ProductHero(props) {
         className={classes.button}
         component="a"
       >
-        Register
+        Tạo tranh
       </Button>
       </Link>
-      <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
+      <Typography variant="body2" color="inherit" className={classes.more} sx={{fontStyle:"italic"}}>
+        *Chỉ 2.000đ cho một tranh minh họa
       </Typography>
     </ProductHeroLayout>
   );

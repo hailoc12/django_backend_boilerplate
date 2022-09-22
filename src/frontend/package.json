@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
+    "caniuse-lite": "^1.0.30001409",
     "clsx": "^1.1.1",
     "formik": "^2.2.6",
     "markdown-to-jsx": "^7.1.1",
@@ -21,7 +22,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3456 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
