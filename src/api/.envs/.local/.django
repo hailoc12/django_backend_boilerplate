@@ -1,0 +1,16 @@
+# General
+# ------------------------------------------------------------------------------
+DJANGO_HOST=http://0.0.0.0:8000
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=sqxLSNYVjKSHgWLSpQSRqOPsvaWWwFJg
+CELERY_FLOWER_PASSWORD=2nVIC9qKztWNzf3XNjg0aBgKvhynGB80IUmgPyaQSYBZPYWspOZoh02xtTQgxEQb
+CELERY_BROKER_URL=redis://127.0.0.1:6379/0

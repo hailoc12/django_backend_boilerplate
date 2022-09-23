@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+
+python3 /app/manage.py collectstatic --noinput
+python3 /app/manage.py makemigrations bots
+python3 /app/manage.py makemigrations kq_xo_so
+python3 /app/manage.py migrate
+/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:5000 --chdir=/app --log-level=DEBUG

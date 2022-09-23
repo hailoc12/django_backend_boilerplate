@@ -1,0 +1,1 @@
+docker compose -f production.yml up django --build --remove-orphans

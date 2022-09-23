@@ -1,0 +1,1 @@
+docker compose -f production.yml run --rm django 
