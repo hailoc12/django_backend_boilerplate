@@ -10,8 +10,8 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: bot_xsmb_production_django
-    platform: linux/x86_64
+    image: production_django
+    # platform: linux/x86_64
     #stdin_open: true
     #tty: true
     depends_on:
@@ -23,46 +23,48 @@ services:
     volumes:
       - .:/app
     command: /start
+    ports:
+      - "0.0.0.0:5000:5000"
 
   postgres:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: bot_xsmb_production_postgres
+    image: production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data:Z
       - production_postgres_data_backups:/backups:z
     env_file:
       - ./.envs/.production/.postgres
 
-  traefik:
-    build:
-      context: .
-      dockerfile: ./compose/production/traefik/Dockerfile
-    image: bot_xsmb_production_traefik
-    depends_on:
-      - django
-    volumes:
-      - production_traefik:/etc/traefik/acme:z
-    ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
-      - "0.0.0.0:5555:5555"
+  # traefik:
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/production/traefik/Dockerfile
+  #   image: production_traefik
+  #   depends_on:
+  #     - django
+  #   volumes:
+  #     - production_traefik:/etc/traefik/acme:z
+  #   ports:
+  #     - "0.0.0.0:5000:5000"
+  #     - "0.0.0.0:443:443"
+  #     - "0.0.0.0:5555:5555"
 
   redis:
     image: redis:6
 
-  celeryworker:
-    <<: *django
-    image: bot_xsmb_production_celeryworker
-    command: /start-celeryworker
+  # celeryworker:
+  #   <<: *django
+  #   image: production_celeryworker
+  #   command: /start-celeryworker
 
-  celerybeat:
-    <<: *django
-    image: bot_xsmb_production_celerybeat
-    command: /start-celerybeat
+  # celerybeat:
+  #   <<: *django
+  #   image: production_celerybeat
+  #   command: /start-celerybeat
 
-  flower:
-    <<: *django
-    image: bot_xsmb_production_flower
-    command: /start-flower
+  # flower:
+  #   <<: *django
+  #   image: production_flower
+  #   command: /start-flower

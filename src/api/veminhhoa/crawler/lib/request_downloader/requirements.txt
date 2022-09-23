@@ -1,6 +1,0 @@
-torrequest==0.1.0
-requests
-requests-html==0.10.0
-selenium==3.141.0
-pytest==6.2.2B
-fake-useragent==0.1.11

@@ -1,7 +1,7 @@
 import pytest 
 pytestmark = pytest.mark.django_db
 
-from bot_xsmb.bots.lib.bot_features import (
+from veminhhoa.bots.lib.bot_features import (
     execute_show_result_by_date, 
     execute_show_today_good_number, 
     execute_calculate_number_statistics, 
@@ -9,20 +9,20 @@ from bot_xsmb.bots.lib.bot_features import (
     execute_share_bot
 )
 
-from bot_xsmb.bots.lib.bot import (
+from veminhhoa.bots.lib.bot import (
     get_all_viber_bots
 )
 
-from bot_xsmb.bots.models import(
+from veminhhoa.bots.models import(
     BotModel
 )
 
-from bot_xsmb.bots.lib.bot_display import (
+from veminhhoa.bots.lib.bot_display import (
     display_free_viber_command_keyboard, 
     display_message_function, 
 )
 
-from bot_xsmb.bots.lib.bot_messages import (
+from veminhhoa.bots.lib.bot_messages import (
     BOT_FEATURE_2_TEXT, BOT_FEATURE_2_STEP_CODES, 
     BOT_FEATURE_3_TEXT, BOT_FEATURE_3_STEP_CODES, BOT_FEATURE_3_STATISTIC_TYPE_1, BOT_FEATURE_3_STATISTIC_TYPE_2, 
     BOT_FEATURE_4_TEXT, BOT_FEATURE_4_STEP_CODES, 

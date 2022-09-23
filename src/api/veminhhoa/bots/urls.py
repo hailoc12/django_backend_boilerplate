@@ -1,6 +1,6 @@
 from django.urls import path
 
-# from bot_xsmb.bots.api.views import (
+# from veminhhoa.bots.api.views import (
 #     free_viber_bot_callback_view, 
 #     premium_viber_bot_callback_view
 # )

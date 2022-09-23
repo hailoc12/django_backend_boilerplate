@@ -1,8 +1,8 @@
-from bot_xsmb.bots.tasks import (
+from veminhhoa.bots.tasks import (
     send_latest_xo_so_result_to_subcribers, 
     remind_subcribers_to_check_result
 )
-from bot_xsmb.crawler.tasks import crawl_xsmb_today_result
+from veminhhoa.crawler.tasks import crawl_xsmb_today_result
 import pytest 
 pytestmark = pytest.mark.django_db
 

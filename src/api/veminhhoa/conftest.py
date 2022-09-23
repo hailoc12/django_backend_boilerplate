@@ -6,7 +6,7 @@ from pathlib import Path
 @pytest.fixture(scope='session')
 def django_db_setup():
     ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-    APPS_DIR = ROOT_DIR / "bot_xsmb"
+    APPS_DIR = ROOT_DIR / "veminhhoa"
     env = environ.Env()
     READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
     if READ_DOT_ENV_FILE:
@@ -16,8 +16,8 @@ def django_db_setup():
     settings.DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
 
 
-# from bot_xsmb.users.models import User
-# from bot_xsmb.users.tests.factories import UserFactory
+# from veminhhoa.users.models import User
+# from veminhhoa.users.tests.factories import UserFactory
 
 
 # @pytest.fixture(autouse=True)

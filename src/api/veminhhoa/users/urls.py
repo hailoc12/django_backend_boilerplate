@@ -1,6 +1,6 @@
 from django.urls import path
 
-from bot_xsmb.users.views import (
+from veminhhoa.users.views import (
     user_detail_view,
     user_redirect_view,
     user_update_view,

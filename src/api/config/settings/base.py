@@ -6,8 +6,7 @@ from pathlib import Path
 import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# bot_xsmb/
-APPS_DIR = ROOT_DIR / "bot_xsmb"
+APPS_DIR = ROOT_DIR / "veminhhoa"
 env = environ.Env()
 
 
@@ -82,10 +81,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "bot_xsmb.users",
-    "bot_xsmb.bots",
-    "bot_xsmb.kq_xo_so", 
-    "bot_xsmb.crawler"
+    "veminhhoa.users",
+    "veminhhoa.bots",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -94,7 +91,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "bot_xsmb.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "veminhhoa.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -190,7 +187,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "bot_xsmb.users.context_processors.allauth_settings",
+                "veminhhoa.users.context_processors.allauth_settings",
             ],
         },
     }
@@ -295,13 +292,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "bot_xsmb.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "veminhhoa.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-ACCOUNT_FORMS = {"signup": "bot_xsmb.users.forms.UserSignupForm"}
+ACCOUNT_FORMS = {"signup": "veminhhoa.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "bot_xsmb.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "veminhhoa.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
-SOCIALACCOUNT_FORMS = {"signup": "bot_xsmb.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_FORMS = {"signup": "veminhhoa.users.forms.UserSocialSignupForm"}
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -321,8 +318,8 @@ CORS_URLS_REGEX = r"^/api/.*$"
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "bot_xsmb API",
-    "DESCRIPTION": "Documentation of API endpoints of bot_xsmb",
+    "TITLE": "veminhhoa API",
+    "DESCRIPTION": "Documentation of API endpoints of veminhhoa",
     "VERSION": "1.0.0",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
     "SERVERS": [

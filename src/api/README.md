@@ -4,7 +4,7 @@
 
 ### Config env files
 - Change DJANGO_HOST in .envs/.django to production domain 
-- Change compose/production/traefik/traefik.yml to match deployment config 
+- Edit production.yml for modifying ports
 
 ## Basic Commands
 

@@ -4,7 +4,7 @@ log:
 entryPoints:
   web:
     # http
-    address: ":80"
+    address: ":5000"
     # http:
       # https://docs.traefik.io/routing/entrypoints/#entrypoint
       # redirections:
@@ -31,7 +31,7 @@ entryPoints:
 http:
   routers:
     web-secure-router:
-      rule: "Host(`veminhhoa.com`) || Host(`veminhhoa.com`)"
+      rule: "Host(`veminhhoa.com`) || Host(`api.veminhhoa.com`)"
       # entryPoints:
       #   - web-secure
       # middlewares:

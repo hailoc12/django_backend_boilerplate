@@ -1,7 +1,7 @@
 import pytest
 from django.urls import resolve, reverse
 
-from bot_xsmb.users.models import User
+from veminhhoa.users.models import User
 
 pytestmark = pytest.mark.django_db
 

@@ -3,46 +3,25 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from bot_xsmb.bots.lib.bot import (
-    FreeViberBot, PremiumViberBot, get_viber_bot_from_callback_request
-)
-import os 
 
-class FreeViberBotCallbackView(APIView): 
-    permission_classes = [AllowAny]
 
-    def post(self, request):
-        viber_bot = get_viber_bot_from_callback_request(request)
-        if viber_bot: 
-            free_viber_bot = FreeViberBot(
-                viber_bot.bot_name, 
-                viber_token=viber_bot.auth_token, 
-                bot_model = viber_bot.bot_model
-            )
+# class FreeViberBotCallbackView(APIView): 
+#     permission_classes = [AllowAny]
 
-            result = free_viber_bot.execute_request(request)
-        else:
-            print("Warning: can't detect where callback request come from")
+#     def post(self, request):
+#         viber_bot = get_viber_bot_from_callback_request(request)
+#         if viber_bot: 
+#             free_viber_bot = FreeViberBot(
+#                 viber_bot.bot_name, 
+#                 viber_token=viber_bot.auth_token, 
+#                 bot_model = viber_bot.bot_model
+#             )
 
-        return Response(200)
+#             result = free_viber_bot.execute_request(request)
+#         else:
+#             print("Warning: can't detect where callback request come from")
 
-free_viber_bot_callback_view = FreeViberBotCallbackView.as_view()
+#         return Response(200)
 
-class PremiumViberBotCallbackView(APIView): 
-    permission_classes = [AllowAny]
+# free_viber_bot_callback_view = FreeViberBotCallbackView.as_view()
 
-    def post(self, request):
-        viber_bot = get_viber_bot_from_callback_request(request)
-        if viber_bot: 
-            premium_viber_bot = PremiumViberBot(
-                viber_bot.bot_name, 
-                viber_token=viber_bot.auth_token, 
-                bot_model = viber_bot.bot_model
-            )
-            result = premium_viber_bot.execute_request(request)
-        else:
-            print("Warning: can't detect where callback request come from")
-
-        return Response(200)
-
-premium_viber_bot_callback_view = PremiumViberBotCallbackView.as_view()

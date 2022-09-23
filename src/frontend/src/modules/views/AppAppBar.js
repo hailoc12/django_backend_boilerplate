@@ -44,7 +44,7 @@ function AppAppBar(props) {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
+          <div className={classes.left}>
           <Link to={"/"}>
             <Typography
               variant="h6"
@@ -52,9 +52,22 @@ function AppAppBar(props) {
               color="inherit"
               className={classes.title}
             >
-              {"Vẽ minh họa bằng tiếng Việt"}
+              {"Vẽ minh họa"}
             </Typography>
           </Link>
+          </div>
+          <div className={classes.center}>
+          <Link to={"/"}>
+            <Typography
+              variant="h9"
+              underline="none"
+              color="inherit"
+              className={classes.title}
+            >
+              {"Giới thiệu"}
+            </Typography>
+          </Link>
+          </div>
           <div className={classes.right}>
             <Link to={"/signin"}>
               <Typography

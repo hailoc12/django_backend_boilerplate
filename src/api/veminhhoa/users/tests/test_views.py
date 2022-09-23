@@ -8,10 +8,10 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.test import RequestFactory
 from django.urls import reverse
 
-from bot_xsmb.users.forms import UserAdminChangeForm
-from bot_xsmb.users.models import User
-from bot_xsmb.users.tests.factories import UserFactory
-from bot_xsmb.users.views import (
+from veminhhoa.users.forms import UserAdminChangeForm
+from veminhhoa.users.models import User
+from veminhhoa.users.tests.factories import UserFactory
+from veminhhoa.users.views import (
     UserRedirectView,
     UserUpdateView,
     user_detail_view,
