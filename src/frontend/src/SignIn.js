@@ -125,7 +125,7 @@ function SignIn() {
                 </Box>
                 <Typography color="textSecondary" variant="body1">
                   Don&apos;t have an account?{" "}
-                  <Link to={"signup"} variant="h6">
+                  <Link to={"/signup"} variant="h6">
                     Sign up
                   </Link>
                 </Typography>

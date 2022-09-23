@@ -17,6 +17,7 @@ const styles = (theme) => ({
     backgroundImage: `url(${backgroundImage})`,
     backgroundColor: '#7fc7d9', // Average color of the background image.
     backgroundPosition: 'center',
+    // height: '100vh'
   },
   button: {
     minWidth: 200,
@@ -43,7 +44,7 @@ function ProductHero(props) {
       {/* <Typography color="inherit" align="center" variant="h2" marked="center"> */}
 
       <Typography color="inherit" align="center" variant="h2">
-        Ứng dụng Trí tuệ nhân tạo vẽ tranh minh họa theo cách dễ dàng nhất
+        Ứng dụng Trí tuệ nhân tạo<br></br>vẽ tranh minh họa theo cách dễ dàng nhất
       </Typography>
 
       <TextField
@@ -56,7 +57,7 @@ function ProductHero(props) {
         }}
       />
 
-      <Link to={"/signup"}>
+      <Link to={"/signup"} style={{ textDecoration: 'none' }}>
       <Button
         color="secondary"
         variant="contained"

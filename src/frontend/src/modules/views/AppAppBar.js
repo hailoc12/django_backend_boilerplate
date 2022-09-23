@@ -45,7 +45,7 @@ function AppAppBar(props) {
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           <div className={classes.left}>
-          <Link to={"/"}>
+          <Link to={"/"} style={{ textDecoration: 'none' }}>
             <Typography
               variant="h6"
               underline="none"
@@ -56,7 +56,7 @@ function AppAppBar(props) {
             </Typography>
           </Link>
           </div>
-          <div className={classes.center}>
+          {/* <div className={classes.center}>
           <Link to={"/"}>
             <Typography
               variant="h9"
@@ -67,9 +67,21 @@ function AppAppBar(props) {
               {"Giới thiệu"}
             </Typography>
           </Link>
-          </div>
+          </div> */}
+
           <div className={classes.right}>
-            <Link to={"/signin"}>
+            <Link to={"/about"} style={{ textDecoration: 'none' }}>
+              <Typography
+                variant="h6"
+                underline="none"
+                color="inherit"
+                className={classes.rightLink}
+              >
+                {"Giới thiệu"}
+              </Typography>
+            </Link>
+              
+            <Link to={"/signin"} style={{ textDecoration: 'none' }}>
               <Typography
                 color="inherit"
                 variant="h6"
@@ -79,7 +91,7 @@ function AppAppBar(props) {
                 {"Đăng nhập"}
               </Typography>
             </Link>
-            <Link to={"/signup"}>
+            <Link to={"/signup"} style={{ textDecoration: 'none' }}>
             <Typography
               variant="h6"
               underline="none"
