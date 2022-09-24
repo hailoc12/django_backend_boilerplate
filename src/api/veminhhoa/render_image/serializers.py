@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from veminhhoa.render_image.models import RenderTemplate
+from veminhhoa.render_image.models import RenderTemplate, RenderTransaction
 
 class RenderTemplateSerializer(serializers.ModelSerializer):
     class Meta:
         model = RenderTemplate
-        fields = ['id', 'name', 'description']
+        fields = ['pk', 'name', 'description']
+
+class RenderTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RenderTransaction
+        fields = ['pk', 'raw_prompt', 'render_template']

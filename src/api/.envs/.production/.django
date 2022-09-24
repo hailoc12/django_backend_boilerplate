@@ -1,6 +1,7 @@
 # General
 # ------------------------------------------------------------------------------
 # DJANGO_READ_DOT_ENV_FILE=True
+DJANGO_DEBUG=True
 DJANGO_HOST='https://api.veminhhoa.com'
 DJANGO_SETTINGS_MODULE=config.settings.production
 DJANGO_SECRET_KEY=N87Urr6vGN4kGAbnOCkyymbOZ2vB6r1GUhomFJEbnXVN3KsorKQqaEmlGnY2zxUg

@@ -1,9 +1,9 @@
 from django.urls import path
 from veminhhoa.render_image.api.views import (
-    render_image_from_prompt
+    render_image_from_prompt, 
+    estimate_render_price
 
 )
 
 urlpatterns = [
-    path("render_image/", view=render_image_from_prompt, name="render_image"),
 ]

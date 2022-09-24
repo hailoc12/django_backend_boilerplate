@@ -1,8 +1,8 @@
 ARG PYTHON_VERSION=3.9-slim-bullseye
 
 # define an alias for the specfic python version used in this file.
-# FROM python:${PYTHON_VERSION} as python
-FROM ubuntu as python
+FROM python:${PYTHON_VERSION} as python
+# FROM ubuntu as python
 
 ENV TZ=Asia/Ho_Chi_Minh
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

@@ -1,1 +1,1 @@
-docker compose -f production.yml run django /bin/bash
+sudo docker-compose -f production.yml run django /bin/bash
