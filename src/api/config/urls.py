@@ -27,14 +27,14 @@ urlpatterns += [
     # API base url
     path("v1/", include("config.api_router")),
     # DRF auth token
-    path("auth-token/", obtain_auth_token),
-    path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
-    path(
-        "api/docs/",
-        SpectacularSwaggerView.as_view(url_name="api-schema"),
-        name="api-docs",
-    ),
-    re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf'))
+    # path("auth-token/", obtain_auth_token),
+    # path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
+    # path(
+    #     "api/docs/",
+    #     SpectacularSwaggerView.as_view(url_name="api-schema"),
+    #     name="api-docs",
+    # ),
+    re_path(r'^v1/auth/', include('drf_social_oauth2.urls', namespace='drf'))
 ]
 
 if settings.DEBUG:
