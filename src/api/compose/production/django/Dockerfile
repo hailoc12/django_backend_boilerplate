@@ -4,6 +4,9 @@ ARG PYTHON_VERSION=3.9-slim-bullseye
 # FROM python:${PYTHON_VERSION} as python
 FROM ubuntu as python
 
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Python build stage
 FROM python as python-build-stage
 

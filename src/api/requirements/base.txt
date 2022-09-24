@@ -41,3 +41,6 @@ fake-useragent==0.1.11
 numpy 
 pandas
 django_pandas
+
+#Social oauth
+drf_social_oauth2
