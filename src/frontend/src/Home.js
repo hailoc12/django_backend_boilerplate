@@ -20,19 +20,19 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/">
-          <Index />
+          <Index/>
         </Route>
         <Route path="/signin">
-          <SignIn />
+          <SignIn/>
         </Route>
         <Route path="/signup">
-          <SignUp />
+          <SignUp/>
         </Route>
         <Route path="/terms">
-          <Terms />
+          <Terms/>
         </Route>
         <Route path="/privacy">
-          <Privacy />
+          <Privacy/>
         </Route>
       </Switch>
     </Router>
@@ -44,11 +44,11 @@ function Index() {
     <React.Fragment>
       <AppAppBar />
       <ProductHero />
-      <ProductValues />
-      <ProductCategories />
-      <ProductHowItWorks />
-      <ProductCTA />
-      <ProductSmokingHero />
+      {/* <ProductValues /> */}
+      {/* <ProductCategories /> */}
+      {/* <ProductHowItWorks /> */}
+      {/* <ProductCTA /> */}
+      {/* <ProductSmokingHero /> */}
       <AppFooter />
     </React.Fragment>
   );

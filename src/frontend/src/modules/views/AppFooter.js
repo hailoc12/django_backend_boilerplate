@@ -4,14 +4,14 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '../components/Typography';
 import TextField from '../components/TextField';
-import { Link } from "react-router-dom";
+import { Link } from '@mui/material';
 
 function Copyright() {
   return (
     <React.Fragment>
       {'© '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link href="https://aivgroup.vn/">
+        AIV Group
       </Link>{' '}
       {new Date().getFullYear()}
     </React.Fragment>
@@ -63,13 +63,17 @@ const useStyles = makeStyles((theme) => ({
 
 const LANGUAGES = [
   {
+    code: 'vi-VN',
+    name: 'Tiếng Việt',
+  },
+  {
     code: 'en-US',
     name: 'English',
   },
-  {
-    code: 'fr-FR',
-    name: 'Français',
-  },
+  // {
+  //   code: 'fr-FR',
+  //   name: 'Français',
+  // },
 ];
 
 export default function AppFooter() {
@@ -78,8 +82,8 @@ export default function AppFooter() {
   return (
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
-        <Grid container spacing={5}>
-          <Grid item xs={6} sm={4} md={3}>
+        <Grid container>
+          <Grid item xs={4}>
             <Grid
               container
               direction="column"
@@ -100,22 +104,22 @@ export default function AppFooter() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6} sm={4} md={2}>
+          <Grid item xs={4}>
             <Typography variant="h6" marked="left" gutterBottom>
-              Legal
+              Pháp lý
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link to={"/terms"}>Terms</Link>
+                <Link href="/terms">Điều khoản sử dụng</Link>
               </li>
               <li className={classes.listItem}>
-                <Link to={"/privacy"}>Privacy</Link>
+                <Link href="/privacy">Quyền riêng tư</Link>
               </li>
             </ul>
           </Grid>
-          <Grid item xs={6} sm={8} md={4}>
+          <Grid item xs={4}>
             <Typography variant="h6" marked="left" gutterBottom>
-              Language
+              Ngôn ngữ
             </Typography>
             <TextField
               select
@@ -130,27 +134,6 @@ export default function AppFooter() {
                 </option>
               ))}
             </TextField>
-          </Grid>
-          <Grid item>
-            <Typography variant="caption">
-              {'Icons made by '}
-              <Link href="https://www.freepik.com" rel="sponsored" title="Freepik">
-                Freepik
-              </Link>
-              {' from '}
-              <Link href="https://www.flaticon.com" rel="sponsored" title="Flaticon">
-                www.flaticon.com
-              </Link>
-              {' is licensed by '}
-              <Link
-                href="https://creativecommons.org/licenses/by/3.0/"
-                title="Creative Commons BY 3.0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CC 3.0 BY
-              </Link>
-            </Typography>
           </Grid>
         </Grid>
       </Container>
