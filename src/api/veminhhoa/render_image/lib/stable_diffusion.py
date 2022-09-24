@@ -8,7 +8,7 @@ import requests
 
 class Stable_Diffusion():
     @staticmethod
-    def render_image(options, render_template):
+    def render_image(options, processed_prompt=None, render_template=None):
         """Render images from options"""
         """
             @Return: (a list of image urls hosted on replicate, status_code)
@@ -22,8 +22,11 @@ class Stable_Diffusion():
                 5: out of retry count
 
         """
+        if not processed_prompt:
+            prompt = options['prompt']
+        else:
+            prompt = processed_prompt
 
-        prompt = options['prompt']
         width = options['width'] if 'width' in options else 512 
         height = options['height'] if 'height' in options else 512
 
@@ -33,7 +36,7 @@ class Stable_Diffusion():
         init_image = options['init_image'] if 'init_image' in options else None
         mask = options['mask'] if 'mask' in options else None 
         prompt_strength = options['prompt_strength'] if 'prompt_strength' in options else render_template.prompt_strength
-        num_outputs = options['num_outputs'] if 'num_outputs' in options else render_template.num_outputs
+        num_outputs = options['num_outputs'] if 'num_outputs' in options else 1
 
         if num_outputs not in [1, 4]: 
             return [], 4, 0
@@ -48,18 +51,29 @@ class Stable_Diffusion():
         final_price = 0 
         # see more at: https://replicate.com/stability-ai/stable-diffusion
         try: 
-            output = model.predict(
-                prompt=prompt, 
-                width=width, 
-                height=height,
-                # init_image=init_image,
-                # mask=mask, 
-                # prompt_strength=prompt_strength, 
-                num_outputs=num_outputs, 
-                num_inference_steps=num_inference_steps, 
-                guidance_scale=guidance_scale, 
-                seed = seed
-            )
+            if init_image:
+                output = model.predict(
+                    prompt=prompt, 
+                    width=width, 
+                    height=height,
+                    # init_image=init_image,
+                    # mask=mask, 
+                    # prompt_strength=prompt_strength, 
+                    num_outputs=num_outputs, 
+                    num_inference_steps=num_inference_steps, 
+                    guidance_scale=guidance_scale, 
+                    seed = seed
+                )
+            else:
+                output = model.predict(
+                    prompt=prompt, 
+                    width=width, 
+                    height=height,
+                    num_outputs=num_outputs, 
+                    num_inference_steps=num_inference_steps, 
+                    guidance_scale=guidance_scale, 
+                    seed = seed
+                )
             return output, 0, final_price
         except ModelError:
             print("NSFW content detected")

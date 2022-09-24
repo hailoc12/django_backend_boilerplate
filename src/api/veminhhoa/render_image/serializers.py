@@ -9,4 +9,4 @@ class RenderTemplateSerializer(serializers.ModelSerializer):
 class RenderTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = RenderTransaction
-        fields = ['pk', 'raw_prompt', 'render_template']
+        fields = ['pk', 'raw_prompt', 'translated_prompt', 'render_template', 'processed_prompt', 'image_urls']

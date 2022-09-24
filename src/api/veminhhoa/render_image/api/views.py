@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from veminhhoa.render_image.business import RenderManager
-from veminhhoa.render_image.models import RenderTemplate
+from veminhhoa.render_image.models import RenderTemplate, RenderTransaction
 from veminhhoa.render_image.serializers import RenderTemplateSerializer, RenderTransactionSerializer
 import json
 
@@ -90,5 +90,5 @@ class RenderTemplateViewset(viewsets.ReadOnlyModelViewSet):
 class RenderTransactionViewset(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
     serializer_class = RenderTransactionSerializer
-    queryset = RenderTemplate.objects.all()
+    queryset = RenderTransaction.objects.all().order_by('-pk')
 

@@ -21,7 +21,6 @@ class RenderManager():
         if not render_template: 
             return image_urls, 3, None # wrong template id 
         processed_prompt = render_template.process_prompt(translated_prompt)
-        options['prompt'] = processed_prompt
 
         # create transaction
         transaction = None 
@@ -52,7 +51,7 @@ class RenderManager():
         
         transaction.estimated_price = estimated_price
 
-        image_urls, status_code, final_price = Stable_Diffusion.render_image(options, render_template)
+        image_urls, status_code, final_price = Stable_Diffusion.render_image(options, processed_prompt, render_template)
         if status_code == 0: 
             transaction.final_price = final_price
             transaction.image_urls = image_urls
