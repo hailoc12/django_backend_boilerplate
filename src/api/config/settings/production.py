@@ -10,7 +10,9 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = [
     'veminhhoa.com', 
     'api.veminhhoa.com', 
-    '100.125.178.56'
+    '100.125.178.56',
+    '100.99.6.61',
+    'c270-42-112-40-241.ap.ngrok.io'
 ]
 
 # DATABASES
