@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from veminhhoa.users.forms import UserAdminChangeForm, UserAdminCreationForm
+from veminhhoa.users.models import Bill, Notification, Pocket 
 
 User = get_user_model()
 
@@ -32,3 +33,16 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     list_display = ["username", "name", "is_superuser"]
     search_fields = ["name"]
+
+class PocketAdmin(admin.ModelAdmin):
+    list_display = ('user', 'balance')
+
+class BillAdmin(admin.ModelAdmin):
+    list_display = ('pocket', 'amount', 'name', 'has_processed')
+
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'name', 'has_sent', 'has_read')
+
+admin.site.register(Pocket, PocketAdmin)
+admin.site.register(Bill, BillAdmin)
+admin.site.register(Notification, NotificationAdmin)
