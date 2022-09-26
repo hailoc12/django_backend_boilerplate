@@ -15,12 +15,12 @@ if settings.DEBUG:
 else:
     router = SimpleRouter()
 
-router.register("users", UserViewSet)
-router.register("render_template", RenderTemplateViewset)
-router.register("render_transaction", RenderTransactionViewset)
-router.register("pocket", PocketViewSet)
-router.register("bill", BillViewSet)
-router.register("notification", NotificationViewSet)
+router.register("users", UserViewSet, basename="users")
+router.register("render_template", RenderTemplateViewset, basename='render_template')
+router.register("render_transaction", RenderTransactionViewset, basename='render_transaction')
+router.register("pocket", PocketViewSet, basename='pocket')
+router.register("bill", BillViewSet, basename='bill')
+router.register("notification", NotificationViewSet, basename='notification')
 urlpatterns = router.urls
 
 urlpatterns += [

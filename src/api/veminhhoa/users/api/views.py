@@ -26,19 +26,23 @@ class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericV
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 class PocketViewSet(viewsets.ReadOnlyModelViewSet):
-    # user = self.request.user
-    permission_classes = [AllowAny]
+    def get_queryset(self):
+        user = self.request.user
+        return Pocket.objects.filter(user=user).all()
+
     serializer_class = PocketSerializer
-    queryset = Pocket.objects.all()
 
 class BillViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    def get_queryset(self):
+        user = self.request.user
+        return Bill.objects.filter(user=user).all()
     serializer_class = BillSerializer
-    queryset = Bill.objects.all()
 
 class NotificationViewSet(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+    def get_queryset(self):
+        user = self.request.user
+        return Notification.objects.filter(user=user).all().order_by('-pk')
+
     serializer_class = NotificationSerializer
-    queryset = Notification.objects.all()
 
 

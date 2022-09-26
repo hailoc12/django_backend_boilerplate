@@ -18,6 +18,7 @@ if READ_DOT_ENV_FILE:
 
 # VEMINHHOA
 RENDER_RETRY_COUNT = 3 # number the user can retry on the same prompt
+NEW_USER_REWARD = 3
 
 # GENERAL
 # ------------------------------------------------------------------------------

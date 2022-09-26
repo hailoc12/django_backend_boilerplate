@@ -30,7 +30,6 @@ class Notification(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     name = models.TextField(blank=True)
     detail = models.TextField(blank=True)
-    has_sent = models.BooleanField(default=False)
     has_read = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -52,4 +51,6 @@ class Bill(models.Model):
     def process_bill(self):
         if not self.has_processed:
             self.pocket.change_balance(self.amount)
+            self.has_processed = True
+            self.save()
 
