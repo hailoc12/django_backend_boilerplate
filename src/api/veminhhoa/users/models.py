@@ -40,6 +40,9 @@ class Pocket(models.Model):
     def change_balance(self, amount):
         self.balance += amount 
         self.save()
+    
+    def check_affordable(self, price):
+        return self.balance > price 
 
 class Bill(models.Model):
     pocket = models.ForeignKey(Pocket, null=True, on_delete=models.SET_NULL)

@@ -7,7 +7,7 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework import viewsets
 from .serializers import UserSerializer, PocketSerializer, BillSerializer, NotificationSerializer
 from veminhhoa.users.models import Pocket, Bill, Notification
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 User = get_user_model()
 
 
@@ -37,6 +37,13 @@ class BillViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return Bill.objects.filter(user=user).all()
     serializer_class = BillSerializer
+
+    def get_permissions(self):
+        if self.request.method == "GET": 
+            return [isAuthenticated()]
+        elif self.request.method == "POST":
+            return [IsAdminUser()]
+
 
 class NotificationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):

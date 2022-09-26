@@ -2,6 +2,7 @@
 from veminhhoa.render_image.lib.stable_diffusion import Stable_Diffusion
 from veminhhoa.render_image.models import RenderTemplate, RenderTransaction
 from veminhhoa.render_image.lib.google_translation import PromptTranslation
+from veminhhoa.users.models import User, Bill, Pocket, Notification
 from django.conf import settings 
 
 class RenderManager():
@@ -45,15 +46,19 @@ class RenderManager():
 
         # check if user have enough money
         estimated_price, status_code = RenderManager.estimate_render_price(raw_prompt, render_template_id, transaction_id, options) 
-
+                
         if status_code != 0:
             return [], status_code, transaction
-        
+
+        if not user.pocket.check_affordable(estimated_price): # not enough money
+            status_code = 6 
+            return [], status_code, transaction
+
         transaction.estimated_price = estimated_price
 
         image_urls, status_code, final_price = Stable_Diffusion.render_image(options, processed_prompt, render_template)
         if status_code == 0: 
-            transaction.final_price = final_price
+            transaction.final_price = estimated_price # TODO: find how to calculate final_price
             transaction.image_urls = image_urls
             transaction.retry_count = transaction.retry_count - 1
         
@@ -61,6 +66,25 @@ class RenderManager():
         transaction.save()
 
         return image_urls, status_code, transaction
+    
+    @staticmethod
+    def process_fee(user, transaction):
+        fee = transaction.final_price
+        bill = Bill.objects.create(
+            pocket = user.pocket,
+            amount = -fee, 
+            name = f"Phí tạo ảnh #{transaction.pk} là {fee} điểm", 
+            description = f'Yêu cầu: {transaction.raw_prompt}'
+        )
+
+        bill.process_bill()
+
+        Notification.objects.create(
+            name = f"Phí tạo ảnh #{transaction.pk} là {fee} điểm", 
+            detail = f'Yêu cầu: {transaction.raw_prompt}', 
+            has_read = False
+        )
+        
 
     @staticmethod
     def estimate_render_price(raw_prompt, render_template_id, transaction_id, options):

@@ -37,11 +37,26 @@ class UserAdmin(auth_admin.UserAdmin):
 class PocketAdmin(admin.ModelAdmin):
     list_display = ('user', 'balance')
 
+
+
 class BillAdmin(admin.ModelAdmin):
     list_display = ('pocket', 'amount', 'name', 'has_processed')
+    actions = ('process_bill', )
+
+    @admin.action(description='Process bill')
+    def process_bill(self, request, queryset):
+        for obj in queryset.all():
+            obj.process_bill()
+            Notification.object.create(
+                user = obj.pocket.user, 
+                name = obj.name, 
+                detail= obj.description, 
+                has_read = False
+            )
+
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'name', 'has_sent', 'has_read')
+    list_display = ('user', 'name', 'has_read')
 
 admin.site.register(Pocket, PocketAdmin)
 admin.site.register(Bill, BillAdmin)
