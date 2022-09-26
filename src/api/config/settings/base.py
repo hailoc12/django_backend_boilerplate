@@ -18,7 +18,7 @@ if READ_DOT_ENV_FILE:
 
 # VEMINHHOA
 RENDER_RETRY_COUNT = 3 # number the user can retry on the same prompt
-NEW_USER_REWARD = 3
+NEW_USER_REWARD = 3 # number of free credit for new user
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -88,8 +88,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "veminhhoa.users",
     "veminhhoa.render_image",
+    "veminhhoa.users.apps.UsersConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
