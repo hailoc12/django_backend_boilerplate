@@ -18,11 +18,12 @@ if READ_DOT_ENV_FILE:
 
 # VEMINHHOA
 RENDER_RETRY_COUNT = 3 # number the user can retry on the same prompt
+NEW_USER_REWARD = 3 # number of free credit for new user
 
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool("DJANGO_DEBUG", False)
+DEBUG = True
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -87,8 +88,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "veminhhoa.users",
     "veminhhoa.render_image",
+    "veminhhoa.users.apps.UsersConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -106,8 +107,8 @@ AUTHENTICATION_BACKENDS = [
     # "django.contrib.auth.backends.ModelBackend",
     # "allauth.account.auth_backends.AuthenticationBackend",
     # Facebook OAuth2
-    # 'social_core.backends.facebook.FacebookAppOAuth2',
-    # 'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.facebook.FacebookAppOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
 
     # drf_social_oauth2
     'drf_social_oauth2.backends.DjangoOAuth2',

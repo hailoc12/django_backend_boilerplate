@@ -9,7 +9,6 @@ from veminhhoa.render_image.serializers import RenderTemplateSerializer, RenderT
 import json
 
 class RenderImageFromPromptView(APIView):
-    permission_classes = [AllowAny]
     def post(self, request):
         """Create new render transaction"""
         """
@@ -28,7 +27,9 @@ class RenderImageFromPromptView(APIView):
             return Response("Missing raw_prompt or render_template_id", 400)
         
         image_urls, status_code, transaction = RenderManager.render_images_from_user_prompt(user, raw_prompt, render_template_id, transaction_id, data)
-        if image_urls: 
+        if image_urls and status_code == 0:  # ok 
+            RenderManager.process_fee(user, transaction) # create bill & subtract fee & notify
+
             return Response(
                 {"status": status_code, 
                 "images": image_urls, 
@@ -48,7 +49,6 @@ class RenderImageFromPromptView(APIView):
 render_image_from_prompt = RenderImageFromPromptView.as_view()
 
 class EstimateRenderPrice(APIView):
-    permission_classes = [AllowAny]
     def post(self, request):
         """Estimate render price in point units (1 point = render 1 image 512x512"""
         """
@@ -88,7 +88,8 @@ class RenderTemplateViewset(viewsets.ReadOnlyModelViewSet):
     queryset = RenderTemplate.objects.all()
 
 class RenderTransactionViewset(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [AllowAny]
+    def get_queryset(self):
+        user = self.request.user
+        return RenderTransaction.objects.filter(user=user).all().order_by('-pk')
     serializer_class = RenderTransactionSerializer
-    queryset = RenderTransaction.objects.all().order_by('-pk')
 

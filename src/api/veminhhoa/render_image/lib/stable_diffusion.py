@@ -19,7 +19,8 @@ class Stable_Diffusion():
                 2: size is too large
                 3: wrong render_template_id
                 4: num_outputs must be in [1, 4]
-                5: out of retry count
+                5: out of retry count, 
+                6: run out of money
 
         """
         if not processed_prompt:
