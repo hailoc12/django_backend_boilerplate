@@ -6,6 +6,9 @@ from veminhhoa.render_image.api.views import (
     render_image_from_prompt, RenderTemplateViewset, estimate_render_price,
     RenderTransactionViewset
 )
+from veminhhoa.users.api.views import (
+    PocketViewSet, BillViewSet, NotificationViewSet
+)
 
 if settings.DEBUG:
     router = DefaultRouter()
@@ -15,6 +18,9 @@ else:
 router.register("users", UserViewSet)
 router.register("render_template", RenderTemplateViewset)
 router.register("render_transaction", RenderTransactionViewset)
+router.register("pocket", PocketViewSet)
+router.register("bill", BillViewSet)
+router.register("notification", NotificationViewSet)
 urlpatterns = router.urls
 
 urlpatterns += [
