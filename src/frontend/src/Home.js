@@ -44,11 +44,11 @@ function Index() {
     <React.Fragment>
       <AppAppBar />
       <ProductHero />
-      {/* <ProductValues /> */}
-      {/* <ProductCategories /> */}
-      {/* <ProductHowItWorks /> */}
-      {/* <ProductCTA /> */}
-      {/* <ProductSmokingHero /> */}
+      <ProductValues />
+      <ProductCategories />
+      <ProductHowItWorks />
+      <ProductCTA />
+      <ProductSmokingHero />
       <AppFooter />
     </React.Fragment>
   );

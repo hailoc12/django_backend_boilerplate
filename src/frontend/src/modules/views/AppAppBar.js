@@ -6,6 +6,8 @@ import AppBar from "../components/AppBar";
 import Toolbar, { styles as toolbarStyles } from "../components/Toolbar";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+import { IconButton } from "@mui/material";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const styles = (theme) => ({
   title: {
@@ -40,6 +42,8 @@ const styles = (theme) => ({
 function AppAppBar(props) {
   const { classes } = props;
 
+  const user = null;
+
   return (
     <div>
       <AppBar position="fixed">
@@ -56,20 +60,8 @@ function AppAppBar(props) {
             </Typography>
           </Link>
           </div>
-          {/* <div className={classes.center}>
-          <Link to={"/"}>
-            <Typography
-              variant="h9"
-              underline="none"
-              color="inherit"
-              className={classes.title}
-            >
-              {"Giới thiệu"}
-            </Typography>
-          </Link>
-          </div> */}
 
-          <div className={classes.right}>
+          <div className={classes.right} style={{alignItems: 'center'}}>
             <Link to={"/about"} style={{ textDecoration: 'none' }}>
               <Typography
                 variant="h6"
@@ -80,18 +72,45 @@ function AppAppBar(props) {
                 {"Giới thiệu"}
               </Typography>
             </Link>
-              
-            <Link to={"/signin"} style={{ textDecoration: 'none' }}>
+
+            <Link to={"/tutorial"} style={{ textDecoration: 'none' }}>
+              <Typography
+                variant="h6"
+                underline="none"
+                color="inherit"
+                className={classes.rightLink}
+              >
+                {"Hướng dẫn"}
+              </Typography>
+            </Link>
+
+            <Link to={"/pricing"} style={{ textDecoration: 'none', marginRight: '1em' }}>
+              <Typography
+                variant="h6"
+                underline="none"
+                color="inherit"
+                className={classes.rightLink}
+              >
+                {"Bảng giá"}
+              </Typography>
+            </Link>
+            
+            {!user && <Link to={"/signin"} style={{ textDecoration: 'none' }}>
               <Typography
                 color="inherit"
                 variant="h6"
                 underline="none"
-                className={classes.rightLink}
+                className={clsx(classes.rightLink, classes.linkSecondary)}
               >
                 {"Đăng nhập"}
               </Typography>
-            </Link>
-            <Link to={"/signup"} style={{ textDecoration: 'none' }}>
+            </Link>}
+
+            <IconButton>
+              <NotificationsNoneIcon sx={{color: "white"}}/>
+            </IconButton>
+{/* 
+            <Link to={"/signin"} style={{ textDecoration: 'none' }}>
             <Typography
               variant="h6"
               underline="none"
@@ -99,7 +118,7 @@ function AppAppBar(props) {
             >
               {"Đăng ký"}
             </Typography>
-            </Link>
+            </Link> */}
           </div>
         </Toolbar>
       </AppBar>

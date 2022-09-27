@@ -11,7 +11,7 @@ const styles = (theme) => ({
     display: 'flex',
     alignItems: 'center',
     [theme.breakpoints.up('sm')]: {
-      height: '80vh',
+      height: '50vh',
       minHeight: 500,
       maxHeight: 1300,
     },
@@ -64,13 +64,13 @@ function ProductHeroLayout(props) {
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
-        <img
+        {/* <img
           className={classes.arrowDown}
           src="/productHeroArrowDown.png"
           height="16"
           width="12"
           alt="arrow down"
-        />
+        /> */}
       </Container>
     </section>
   );

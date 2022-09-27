@@ -4,25 +4,30 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '../components/Typography';
 import TextField from '../components/TextField';
-import { Link } from '@mui/material';
+import { Link, withStyles } from '@mui/material';
 
-function Copyright() {
+function Copyright(props) {
   return (
-    <React.Fragment>
-      {'© '}
-      <Link href="https://aivgroup.vn/">
+    <>
+      <span {...props}>{'© '}</span>
+      <Link href="https://aivgroup.vn/" {...props}>
         AIV Group
       </Link>{' '}
-      {new Date().getFullYear()}
-    </React.Fragment>
+      <span {...props}>{new Date().getFullYear()}</span>
+    </>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    backgroundColor: theme.palette.secondary.light,
+    // backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.primary.dark,
   },
+  link: {
+    color: theme.palette.common.white,
+  },
+  
   container: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
@@ -83,11 +88,11 @@ export default function AppFooter() {
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
         <Grid container>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <Grid
               container
               direction="column"
-              justify="flex-end"
+              justifyContent="flex-end"
               className={classes.iconsWrapper}
               spacing={2}
             >
@@ -100,24 +105,24 @@ export default function AppFooter() {
                 </a>
               </Grid>
               <Grid item>
-                <Copyright />
+                <Copyright style={{color: 'white'}} />
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Typography variant="h6" marked="left" gutterBottom>
+          <Grid item xs={6}>
+            <Typography variant="h6" marked="left" style={{color: 'white'}} gutterBottom>
               Pháp lý
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="/terms">Điều khoản sử dụng</Link>
+                <Link href="/terms" style={{color: 'white'}}>Điều khoản sử dụng</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="/privacy">Quyền riêng tư</Link>
+                <Link href="/privacy" style={{color: 'white'}}>Quyền riêng tư</Link>
               </li>
             </ul>
           </Grid>
-          <Grid item xs={4}>
+          {/* <Grid item xs={4}>
             <Typography variant="h6" marked="left" gutterBottom>
               Ngôn ngữ
             </Typography>
@@ -134,7 +139,7 @@ export default function AppFooter() {
                 </option>
               ))}
             </TextField>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Typography>

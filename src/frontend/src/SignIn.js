@@ -4,16 +4,24 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import {
   Box,
-  Button,
+  // Button,
   TextField,
   makeStyles,
 } from "@material-ui/core";
-import Typography from './modules/components/Typography';
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
+// import Typography from './modules/components/Typography';
 import AppFooter from './modules/views/AppFooter';
 import AppAppBar from './modules/views/AppAppBar';
 import AppForm from './modules/views/AppForm';
 import * as Yup from "yup";
 import { Formik } from "formik";
+
+// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import FacebookIcon from '@mui/icons-material/Facebook';
+
+// const backgroundImage = 'https://metaphysic.ai/wp-content/uploads/2022/09/ARTICLE_montage-stable-diffusion.jpg';
+const backgroundImage = '/background.jpg';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -26,27 +34,70 @@ const useStyles = makeStyles((theme) => ({
   feedback: {
     marginTop: theme.spacing(2),
   },
+  background: {
+    backgroundImage: `url(${backgroundImage})`,
+    // backgroundImage: 'url(/background.jpg)',
+    backgroundColor: '#000',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    // height: '100vh'
+  },
 }));
 
 function SignIn() {
-  const classes = useStyles();
+  const styles = useStyles();
+
+  const responseFacebook = (response) => {
+    console.log('facebook', response);
+  }
 
   return (
-    <React.Fragment>
+    <>
       <AppAppBar />
-      <AppForm>
-        <React.Fragment>
-          <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
-          </Typography>
-          <Typography variant="body2" align="center">
-            {'Not a member yet? '}
-            <Link to={"/signup"} align="center" underline="always">
-              Sign Up here
-            </Link>
-          </Typography>
-        </React.Fragment>
 
+      <Box style={{backgroundColor: 'black', position: 'relative', height: '80vh'}}>
+        <Grid container style={{position: 'absolute', height: '80vh', opacity: 0.5}} className={styles.background}></Grid>
+        
+        
+        <Grid container direction="column" alignItems="center" position="relative">
+          <Grid item xs={12}>
+              <Card style={{ minHeight: "50vh", padding: "3rem", margin: "4rem 1rem 0rem 1rem", backgroundColor: "rgba(0,0,0,0.8)"}}>
+                <CardContent>
+                  <Typography variant="h5" mb={5} color="white"><b>Đăng nhập</b></Typography>
+                  <FacebookLogin
+                    appId="614342580170103"
+                    // autoLoad
+                    callback={responseFacebook}
+                    render={renderProps => (
+                      <Button variant='contained' onClick={renderProps.onClick} startIcon={<FacebookIcon/>} size="large">Đăng nhập bằng Facebook</Button>
+                  )}
+                  />
+                </CardContent>
+              </Card>
+          </Grid>
+        </Grid>
+      
+
+      </Box>
+      
+
+      <AppFooter/>
+      
+      
+
+
+      {/* <AppForm>
+      
+        <Typography variant="h3" gutterBottom marked="center" align="center">
+          Sign In
+        </Typography>
+        <Typography variant="body2" align="center">
+          {'Not a member yet? '}
+          <Link to={"/signup"} align="center" underline="always">
+            Sign Up here
+          </Link>
+        </Typography>
+        
         <Formik
             initialValues={{
               email: "",
@@ -63,11 +114,6 @@ function SignIn() {
             })}
             onSubmit={async (values) => {
               try {
-                /*
-                await Auth.signIn(values.email, values.password);
-                userHasAuthenticated(true);
-                navigate("/app/account");
-                */
                 window.location.reload();
               } catch (e) {
                 alert(e.message);
@@ -126,15 +172,15 @@ function SignIn() {
                 <Typography color="textSecondary" variant="body1">
                   Don&apos;t have an account?{" "}
                   <Link to={"/signup"} variant="h6">
-                    Sign up
+                    Sign upp
                   </Link>
                 </Typography>
               </form>
             )}
-          </Formik>
-      </AppForm>
-      <AppFooter />
-    </React.Fragment>
+        </Formik>
+      </AppForm> */}
+      
+    </>
   );
 }
 
