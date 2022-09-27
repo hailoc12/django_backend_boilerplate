@@ -12,6 +12,9 @@ ALLOWED_HOSTS = [
     'api.veminhhoa.com', 
     '100.125.178.56',
     '100.99.6.61',
+    '127.0.0.1', 
+    '0.0.0.0', 
+    'localhost', 
     'c270-42-112-40-241.ap.ngrok.io'
 ]
 
