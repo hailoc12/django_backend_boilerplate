@@ -12,7 +12,19 @@ ALLOWED_HOSTS = [
     'api.veminhhoa.com', 
     '100.125.178.56',
     '100.99.6.61',
+    '127.0.0.1', 
+    '127.0.0.1:3456', 
+    '0.0.0.0', 
+    'localhost', 
+    'localhost:3456', 
     'c270-42-112-40-241.ap.ngrok.io'
+]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3456', 
+    'http://127.0.0.1:3456', 
+    'https://veminhhoa.com',
+    'https://localhost:3456',
+    'https://127.0.0.1:3456',
 ]
 
 # DATABASES
