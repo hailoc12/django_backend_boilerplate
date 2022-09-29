@@ -4,7 +4,6 @@ function path(root, sublink) {
   return `${root}${sublink}`;
 }
 
-export const HOME_PAGE = '/';
 const ROOTS_AUTH = '/auth';
 const ROOTS_DASHBOARD = '/dashboard';
 
@@ -21,6 +20,7 @@ export const PATH_AUTH = {
 };
 
 export const PATH_PAGE = {
+  home: '/',
   comingSoon: '/coming-soon',
   maintenance: '/maintenance',
   pricing: '/pricing',
@@ -32,6 +32,7 @@ export const PATH_PAGE = {
   page500: '/500',
   components: '/components',
   tutorial: '/tutorial',
+  render: '/render',
 };
 
 export const PATH_DASHBOARD = {

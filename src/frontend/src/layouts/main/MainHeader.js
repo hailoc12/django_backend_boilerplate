@@ -21,6 +21,7 @@ import { PATH_AUTH } from 'src/routes/paths';
 import useAuth from 'src/hooks/useAuth';
 import AccountPopover from '../dashboard/header/AccountPopover';
 import NotificationsPopover from '../dashboard/header/NotificationsPopover';
+import AccountBalance from '../dashboard/header/AccountBalance';
 
 // ----------------------------------------------------------------------
 
@@ -94,7 +95,8 @@ export default function MainHeader() {
           {!isAuthenticated && <Button variant="contained" href={PATH_AUTH.login}>Đăng nhập</Button>}
 
           {isAuthenticated &&
-          <Stack spacing={2} direction='row'>
+          <Stack spacing={2} direction='row' alignItems='center'>
+            <AccountBalance/>
             <NotificationsPopover/>
             <AccountPopover/>
           </Stack>

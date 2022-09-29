@@ -20,17 +20,21 @@ import { IconButtonAnimate } from '../../../components/animate';
 
 const MENU_OPTIONS = [
   {
-    label: 'Home',
+    label: 'Thư viện cá nhân',
     linkTo: '/',
   },
-  {
-    label: 'Profile',
-    linkTo: PATH_DASHBOARD.user.profile,
-  },
-  {
-    label: 'Settings',
-    linkTo: PATH_DASHBOARD.user.account,
-  },
+  // {
+  //   label: 'Home',
+  //   linkTo: '/',
+  // },
+  // {
+  //   label: 'Profile',
+  //   linkTo: PATH_DASHBOARD.user.profile,
+  // },
+  // {
+  //   label: 'Settings',
+  //   linkTo: PATH_DASHBOARD.user.account,
+  // },
 ];
 
 // ----------------------------------------------------------------------
@@ -129,7 +133,7 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
-          Logout
+          Đăng xuất
         </MenuItem>
       </MenuPopover>
     </>

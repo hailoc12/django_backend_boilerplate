@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Render images with prompt",
   "private": true,
-  "scripts": {
+"scripts": {
     "lint": "next lint",
     "lint:es": "eslint --ext .js,.jsx .",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
