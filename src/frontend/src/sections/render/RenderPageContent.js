@@ -40,6 +40,8 @@ const RetryButton = (props) => {
 export default function RenderPageContent() {
     const [rawPrompt, setRawPrompt] = useState('');
     const [result, setResult] = useState(null);
+    const [currentTransactionId, setCurrentTransactionId] = useState(null);
+
     const [loading, setLoading] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -81,7 +83,7 @@ export default function RenderPageContent() {
         setLoading(true);
         try {
             await new Promise(r => setTimeout(r, 2000));
-            const res = await renderImage(overridedRawPrompt || rawPrompt, overridedTemplateId || parseInt(query.templateId), 512, 512, 1);
+            const res = await renderImage(overridedRawPrompt || rawPrompt, overridedTemplateId || parseInt(query.templateId), 512, 512, 1, currentTransactionId);
             // const res = {
             //     "status": 0,
             //     "images": [
@@ -96,6 +98,7 @@ export default function RenderPageContent() {
             // }
             if (res.status === 0) {
                 setResult(res);
+                setCurrentTransactionId(res.transaction_id);
             } 
             else {
                 setResult(null);
@@ -136,6 +139,15 @@ export default function RenderPageContent() {
         render();
     }
 
+    useEffect(() => {
+        if (!result) return;
+
+        if (result.retry_count === 0) {
+            setCurrentTransactionId(null);
+        }
+
+    }, [result])
+
     return (
         <MotionContainer>
             <RootStyle>
@@ -148,22 +160,26 @@ export default function RenderPageContent() {
                     </Box>
 
                     {loading && <LinearProgress my={3}/>}
-
-                    {result &&
-                    <Stack width="100%" alignItems="center" justifyContent="center">
+                    
+                    <Stack width="100%" alignItems="center" justifyContent="center" sx={{minHeight: '45vh'}}>
                         <Grid container alignItems="start" justifyContent="space-evenly" spacing={2}>
-                            {result.images.map((image, i) => 
-                                <Grid item key={i} xs={6} sm={3}>
+                            {result && result.images.map((image, i) => 
+                                <Grid item key={i} xs={12} sm={6} md={4}>
                                     <ResultItem src={image} onClick={() => handleClickItem({url: image, prompt: rawPrompt})}/>
                                 </Grid>
                             )}
                         </Grid>
-                        <Typography my={3}>Chưa ưng ý với bức ảnh? Bạn có thể thử lại lần nữa. </Typography>
-                        <RetryButton onClick={handleRetry}/>
-                        {result && <Typography my={3}>Bạn còn <span style={{color: theme.palette.primary.main}}>{result.retry_count}</span> lượt thử miễn phí</Typography>}
-                    </Stack>}
+                        {result && result.retry_count > 0 && 
+                        <>
+                            <Typography my={3}>Chưa ưng ý với bức ảnh? Bạn có thể thử lại lần nữa. </Typography>
+                            <RetryButton onClick={handleRetry}/>
+                            <Typography my={3}>Bạn còn <span style={{color: theme.palette.primary.main}}>{result.retry_count}</span> lượt thử miễn phí</Typography>
+                        </>}
+                    </Stack>
 
                     <GalleryItemModal open={openModal} onClose={handleCloseModal} item={selectedItem}/>
+
+                    <Box height={300}></Box>
 
                 </Container>
             </RootStyle>
