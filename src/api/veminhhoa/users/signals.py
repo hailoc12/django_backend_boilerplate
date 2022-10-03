@@ -13,7 +13,7 @@ def create_user(sender, instance, created, **kwargs):
         bill = Bill.objects.create(
             pocket = pocket, 
             amount = settings.NEW_USER_REWARD, 
-            name = f'Tặng {settings.NEWS_USER_REWARD} lượt vẽ tranh miễn phí cho thành viên mới', 
+            name = f'Tặng {settings.NEW_USER_REWARD} lượt vẽ tranh miễn phí cho thành viên mới', 
             description = ''
         )
 
@@ -21,7 +21,7 @@ def create_user(sender, instance, created, **kwargs):
 
         Notification.objects.create(
             user = user, 
-            name = f'Bạn đã được tặng {settings.NEWS_USER_REWARD} lượt vẽ tranh miễn phí', 
+            name = f'Bạn đã được tặng {settings.NEW_USER_REWARD} lượt vẽ tranh miễn phí', 
             detail = 'Mỗi lượt vẽ tranh tương đương một bức ảnh 512x512 pixel', 
             has_read = False
         )
