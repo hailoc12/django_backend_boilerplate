@@ -66,8 +66,13 @@ function AuthProvider({ children }) {
       FB.getLoginStatus((response) => {
         const authResponse = response.authResponse;
 
+        console.log(authResponse);
+
         if (response.status === 'connected') {
-          setSession(authResponse.accessToken);
+          // setSession(authResponse.accessToken);
+
+          // DEBUG ONLY !!!
+          setSession("14e3c93c93ee4f37169aff1664df4af90bad74ea");
 
           console.log('authResponse', authResponse);
 
@@ -101,10 +106,14 @@ function AuthProvider({ children }) {
   const login = (onSuccess=()=>{}, onFailure=()=>{}) => {
     return FB.login(({ authResponse }) => {
       if (authResponse) {
+        // setSession(authResponse.accessToken);
+        setSession("14e3c93c93ee4f37169aff1664df4af90bad74ea");
+
         FB.api('/me', {fields: 'name,picture'}, function(response) {  
           const user = {
             id: response.id,
             name: response.name,
+            picture: response.picture?.data.url,
           }
 
           onSuccess(user);
@@ -120,6 +129,7 @@ function AuthProvider({ children }) {
 
   const logout = () => {
     FB.logout((response) => {
+      setSession(null);
       dispatch({ type: 'LOGOUT' });
     })
   };

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import useAuth from 'src/hooks/useAuth';
 import { useRouter } from 'next/router';
-import { HOME_PAGE } from 'src/routes/paths';
+import { PATH_PAGE } from 'src/routes/paths';
 
 const FBButton = styled(LoadingButton)(({ theme }) => ({
   // color: theme.palette.getContrastText(purple[500]),
@@ -24,7 +24,7 @@ export default function FacebookLoginButton(props) {
 
   const handleSuccess = () => {
     setLoading(false);
-    router.replace(HOME_PAGE);
+    router.replace(PATH_PAGE.home);
   }
 
   const handleFailure = () => {

@@ -13,7 +13,7 @@ import SocialsButton from '../../components/SocialsButton';
 
 const LINKS = [
   {
-    headline: 'Minimal',
+    headline: 'VEMINHHOA',
     children: [
       { name: 'About us', href: PATH_PAGE.about },
       { name: 'Contact us', href: PATH_PAGE.contact },
@@ -28,9 +28,9 @@ const LINKS = [
     ],
   },
   {
-    headline: 'Contact',
+    headline: 'Liên hệ',
     children: [
-      { name: 'support@minimals.cc', href: '#' },
+      { name: 'support@veminhhoa.com', href: '#' },
       { name: 'Los Angeles, 359  Hidden Valley Road', href: '#' },
     ],
   },
@@ -104,7 +104,7 @@ export default function MainFooter() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          © 2021. All rights reserved
+          © 2022. Đã đăng ký Bản quyền
         </Typography>
       </Container>
     </RootStyle>
