@@ -1,17 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { m } from 'framer-motion';
 import { styled, useTheme } from '@mui/material/styles';
-import { Button, Box, Link, Grid, Container, Typography, Stack, ButtonGroup, TextField, InputAdornment, Popper, Grow, MenuList, MenuItem, Paper, LinearProgress } from '@mui/material';
-import { PATH_AUTH, PATH_DASHBOARD, PATH_PAGE } from '../../routes/paths';
-import { MotionContainer, varFade } from '../../components/animate';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { getRenderTemplates, renderImage } from 'src/services/RenderService';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import useAuth from 'src/hooks/useAuth';
+import { Button, Box, Link, Grid, Container, Typography, Stack, LinearProgress } from '@mui/material';
+import { MotionContainer } from '../../components/animate';
 import { useRouter } from 'next/router';
 import { PromptTextField } from './PromptTextField';
 import { RenderButtonGroup } from './RenderButtonGroup';
 import { useSnackbar } from 'notistack';
+import ResultItem from './ResultItem';
+import GalleryItemModal from './GalleryItemModal';
+import { renderImage } from 'src/services/RenderService';
+
 
 const RootStyle = styled(m.div)(({ theme }) => ({
     position: 'relative',
@@ -25,7 +24,7 @@ const RootStyle = styled(m.div)(({ theme }) => ({
         height: '100%',
         // height: '50vh',
         display: 'flex',
-        paddingTop: theme.spacing(25),
+        paddingTop: theme.spacing(10),
         // alignItems: 'center',
     },
 }));
@@ -42,13 +41,28 @@ export default function RenderPageContent() {
     const [rawPrompt, setRawPrompt] = useState('');
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
 
-    const { query } = useRouter();
+    const router = useRouter();
+    const { pathname, query } = router;
+    
     const theme = useTheme();
 
     const { autoRender } = query;
 
     const { enqueueSnackbar } = useSnackbar();
+
+
+    const removeQueryParam = (param) => {
+        const params = new URLSearchParams(query);
+        params.delete(param);
+        router.replace(
+            { pathname, query: params.toString() },
+            undefined, 
+            { shallow: true }
+        );
+    };
 
     useEffect(() => {
         if (query.rawPrompt) {
@@ -56,40 +70,47 @@ export default function RenderPageContent() {
         }
 
         if (autoRender === 'true' && query.rawPrompt && query.templateId) {
-            setLoading(true);
-            (async () => {
-                try {
-                    const res = await renderImage(query.rawPrompt, parseInt(query.templateId), 512, 512, 1);
-                    // const res = {
-                    //     "status": 0,
-                    //     "images": [
-                    //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
-                    //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
-                    //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
-                    //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
-                    //     ],
-                    //     "retry_count": 2,
-                    //     "transaction_id": 605
-                    // }
-                    if (res.status === 0) {
-                        setResult(res);
-                    } 
-                    else {
-                        setResult(null);
-
-                        // TODO: ghi ro loi dua tren res.status
-                        enqueueSnackbar("Có lỗi xảy ra", {variant: 'error'});
-                    }
-                } catch(e) {
-                    console.error(e);
-                    enqueueSnackbar("Có lỗi xảy ra", {variant: 'error'});
-                }
-
-                setLoading(false);
-            })();
-            
+            console.log('Auto render');
+            removeQueryParam('autoRender');
+            render(query.rawPrompt, parseInt(query.templateId));
         }
     }, [query])
+
+    const render = async (overridedRawPrompt=undefined, overridedTemplateId=undefined) => {
+        console.log('Rendering...', overridedRawPrompt || rawPrompt, overridedTemplateId || parseInt(query.templateId));
+        setLoading(true);
+        try {
+            await new Promise(r => setTimeout(r, 2000));
+            const res = await renderImage(overridedRawPrompt || rawPrompt, overridedTemplateId || parseInt(query.templateId), 512, 512, 1);
+            // const res = {
+            //     "status": 0,
+            //     "images": [
+            //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
+            //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
+            //         "https://image.lexica.art/md/085ee24c-8473-430b-a831-9cdef41972a9",
+            //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
+            //         "https://replicate.com/api/models/stability-ai/stable-diffusion/files/7fd36274-3435-42e8-851a-f764d6ee91dc/out-0.png",
+            //     ],
+            //     "retry_count": 2,
+            //     "transaction_id": 605
+            // }
+            if (res.status === 0) {
+                setResult(res);
+            } 
+            else {
+                setResult(null);
+
+                // TODO: ghi ro loi dua tren res.status
+                enqueueSnackbar("Có lỗi xảy ra", {variant: 'error'});
+            }
+        } catch(e) {
+            console.error(e);
+            enqueueSnackbar("Có lỗi xảy ra", {variant: 'error'});
+        }
+
+        setLoading(false);
+        console.log('Finished rendering');
+    }
 
     const handleRawPromptChange = (e) => {
         setRawPrompt(e.target.value);
@@ -97,25 +118,22 @@ export default function RenderPageContent() {
 
     const handleRenderButtonClick = async (templateId) => {
         setLoading(true);
-        (async () => {
-            try {
-                const res = await renderImage(rawPrompt, parseInt(templateId), 512, 512, 4);
-                if (res.status === 0) {
-                    setResult(res);
-                } 
-                else {
-                    setResult(null);
+        render();
+    }
 
-                    // TODO: ghi ro loi dua tren res.status
-                    enqueueSnackbar("Có lỗi xảy ra", {variant: 'error'});
-                }
-            } catch(e) {
-                console.error(e);
-                enqueueSnackbar("Có lỗi xảy ra", {variant: 'error'});
-            }
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    }
 
-            setLoading(false);
-        })();
+    const handleClickItem = (item) => {
+        setOpenModal(true);
+        setSelectedItem(item);
+    }
+
+    const handleRetry = () => {
+        console.log('retrying...');
+        setResult(null);
+        render();
     }
 
     return (
@@ -133,18 +151,20 @@ export default function RenderPageContent() {
 
                     {result &&
                     <Stack width="100%" alignItems="center" justifyContent="center">
-                        <Grid container alignItems="center" justifyContent="space-between" spacing={2}>
+                        <Grid container alignItems="start" justifyContent="space-evenly" spacing={2}>
                             {result.images.map((image, i) => 
                                 <Grid item key={i} xs={6} sm={3}>
-                                    <img src={image} style={{marginLeft: 'auto', marginRight: 'auto'}} />
+                                    <ResultItem src={image} onClick={() => handleClickItem({url: image, prompt: rawPrompt})}/>
                                 </Grid>
-                                
                             )}
                         </Grid>
                         <Typography my={3}>Chưa ưng ý với bức ảnh? Bạn có thể thử lại lần nữa. </Typography>
-                        <RetryButton/>
-                        <Typography my={3}>Bạn còn <span style={{color: theme.palette.primary.main}}>{result.retry_count}</span> lượt thử miễn phí</Typography>
+                        <RetryButton onClick={handleRetry}/>
+                        {result && <Typography my={3}>Bạn còn <span style={{color: theme.palette.primary.main}}>{result.retry_count}</span> lượt thử miễn phí</Typography>}
                     </Stack>}
+
+                    <GalleryItemModal open={openModal} onClose={handleCloseModal} item={selectedItem}/>
+
                 </Container>
             </RootStyle>
         </MotionContainer>

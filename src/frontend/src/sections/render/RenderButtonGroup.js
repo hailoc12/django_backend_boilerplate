@@ -53,8 +53,6 @@ export const RenderButtonGroup = ({onSubmit, onTemplateChange=() => {}, defaultT
     useEffect(() => {
         if (!templates || !templates.length) return;
 
-        console.log(defaultTemplateId);
-        
         if (defaultTemplateId === undefined || defaultTemplateId === null) setSelectedTemplate(templates[Math.floor(Math.random() * templates.length)]);
         else {
           for (let i=0; i<templates.length; i++) {

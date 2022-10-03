@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Render images with prompt",
   "private": true,
-"scripts": {
+  "scripts": {
     "lint": "next lint",
     "lint:es": "eslint --ext .js,.jsx .",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
@@ -46,6 +46,7 @@
     "date-fns": "^2.27.0",
     "deck.gl": "^8.6.5",
     "emoji-mart": "^3.0.0",
+    "file-saver": "^2.0.5",
     "firebase": "^9.6.1",
     "framer-motion": "^5.5.5",
     "geojson": "^0.5.0",
