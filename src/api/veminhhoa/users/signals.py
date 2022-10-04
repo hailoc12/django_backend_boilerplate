@@ -20,7 +20,7 @@ def create_user(sender, instance, created, **kwargs):
         bill.process_bill()
 
         Notification.objects.create(
-            user = user, 
+            user = instance, 
             name = f'Bạn đã được tặng {settings.NEW_USER_REWARD} lượt vẽ tranh miễn phí', 
             detail = 'Mỗi lượt vẽ tranh tương đương một bức ảnh 512x512 pixel', 
             has_read = False

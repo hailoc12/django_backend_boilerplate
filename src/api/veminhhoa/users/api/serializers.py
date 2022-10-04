@@ -21,10 +21,10 @@ class PocketSerializer(serializers.ModelSerializer):
 
 class BillSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Bill
+         model = Bill
         fields = ['amount', 'name', 'description', 'has_processed']
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
-        fields = ['name', 'detail', 'has_sent', 'has_read', 'created']
+        fields = ['name', 'detail', 'has_read', 'created']

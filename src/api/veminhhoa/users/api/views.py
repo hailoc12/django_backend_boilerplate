@@ -35,12 +35,12 @@ class PocketViewSet(viewsets.ReadOnlyModelViewSet):
 class BillViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
-        return Bill.objects.filter(user=user).all()
+        return Bill.objects.filter(pocket=user.pocket).all()
     serializer_class = BillSerializer
 
     def get_permissions(self):
         if self.request.method == "GET": 
-            return [isAuthenticated()]
+            return [IsAuthenticated()]
         elif self.request.method == "POST":
             return [IsAdminUser()]
 
