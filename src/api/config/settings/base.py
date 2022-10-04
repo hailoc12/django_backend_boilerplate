@@ -17,8 +17,6 @@ if READ_DOT_ENV_FILE:
     env.read_env(str(ROOT_DIR / ".env"))
 
 # VEMINHHOA
-RENDER_RETRY_COUNT = 3 # number the user can retry on the same prompt
-NEW_USER_REWARD = 3 # number of free credit for new user
 
 # GENERAL
 # ------------------------------------------------------------------------------
