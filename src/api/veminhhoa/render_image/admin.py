@@ -1,7 +1,7 @@
 from django.contrib import admin
 import os 
 from veminhhoa.render_image.models import RenderTemplate, RenderTransaction
-from veminhhoa.render_image.models import Book, Author, Order
+from veminhhoa.render_image.models import Book, Author, Order, Category
 
 admin.AdminSite.site_header = 'Admin Site'
 admin.AdminSite.site_title = 'Admin Site'
@@ -22,10 +22,14 @@ class AuthorAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('pk', 'book', 'price')
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name')
+
 admin.site.register(RenderTemplate, RenderTemplateAdmin)
 admin.site.register(RenderTransaction, RenderTransactionAdmin)
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Category, CategoryAdmin)
 

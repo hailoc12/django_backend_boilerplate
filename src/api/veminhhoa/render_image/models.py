@@ -51,11 +51,17 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+class Category(models.Model):
+    name = models.TextField(blank=True)
+
 class Book(models.Model):
     name = models.TextField(blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+
+
 
 class Order(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
