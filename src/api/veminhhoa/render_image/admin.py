@@ -20,7 +20,7 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name')
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name')
+    list_display = ('pk', 'book', 'price')
 
 admin.site.register(RenderTemplate, RenderTemplateAdmin)
 admin.site.register(RenderTransaction, RenderTransactionAdmin)
