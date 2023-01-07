@@ -42,3 +42,17 @@ class RenderTransaction(models.Model):
     # cashback program
     user_review = models.IntegerField(default=0)
     user_feedback = models.TextField(blank=True)
+
+
+class Author(models.Model):
+    name = models.TextField()
+    description = models.TextField()
+    year_of_born = models.IntegerField(default=1990)
+
+class Book(models.Model):
+    name = models.TextField()
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+class Order(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    price = models.IntegerField(default=0)
