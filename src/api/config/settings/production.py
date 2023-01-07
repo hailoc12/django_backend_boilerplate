@@ -17,6 +17,7 @@ ALLOWED_HOSTS = [
     '0.0.0.0', 
     'localhost', 
     'localhost:3456', 
+    'localhost:5000', 
     'c270-42-112-40-241.ap.ngrok.io'
 ]
 CORS_ALLOWED_ORIGINS = [
@@ -25,8 +26,11 @@ CORS_ALLOWED_ORIGINS = [
     'https://veminhhoa.com',
     'https://localhost:3456',
     'https://127.0.0.1:3456',
+    'http://localhost:5000'
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5000'
+]
 # DATABASES
 # ------------------------------------------------------------------------------
 DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
