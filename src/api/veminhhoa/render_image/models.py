@@ -53,16 +53,18 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.TextField(blank=True)
+    def __str__(self):
+        return self.name 
 
 class Book(models.Model):
     name = models.TextField(blank=True)
-    author = models.ForeignKey(Author, null=True, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, null=True, on_delete=models.CASCADE, related_name='books')
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE, related_name='books')
     def __str__(self):
         return self.name
 
 
 
 class Order(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='orders')
     price = models.IntegerField(default=0)

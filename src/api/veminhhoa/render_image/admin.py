@@ -14,7 +14,8 @@ class RenderTransactionAdmin(admin.ModelAdmin):
     list_display = ('pk', 'raw_prompt')
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name')
+    list_display = ('pk', 'name', 'category')
+    list_editable = ('category', )
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name')
