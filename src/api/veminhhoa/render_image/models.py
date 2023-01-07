@@ -48,11 +48,15 @@ class Author(models.Model):
     name = models.TextField(blank=True)
     description = models.TextField(blank=True)
     year_of_born = models.IntegerField(default=1990)
+    def __name__(self):
+        return self.name
 
 class Book(models.Model):
     name = models.TextField(blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-
+    def __name__(self):
+        return self.name
+        
 class Order(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     price = models.IntegerField(default=0)
