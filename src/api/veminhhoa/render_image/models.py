@@ -45,12 +45,12 @@ class RenderTransaction(models.Model):
 
 
 class Author(models.Model):
-    name = models.TextField()
-    description = models.TextField()
+    name = models.TextField(blank=True)
+    description = models.TextField(blank=True)
     year_of_born = models.IntegerField(default=1990)
 
 class Book(models.Model):
-    name = models.TextField()
+    name = models.TextField(blank=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
 class Order(models.Model):
