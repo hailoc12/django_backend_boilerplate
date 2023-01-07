@@ -56,8 +56,8 @@ class Category(models.Model):
 
 class Book(models.Model):
     name = models.TextField(blank=True)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
