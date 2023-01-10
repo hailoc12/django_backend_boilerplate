@@ -13,3 +13,4 @@ google-cloud-translate
 jupyter 
 ipython 
 django-extensions
+Werkzeug
