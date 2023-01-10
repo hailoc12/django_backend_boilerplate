@@ -42,5 +42,9 @@ numpy
 pandas
 django_pandas
 
+jupyter 
+ipython 
+django-extensions
+
 #Social oauth
 drf_social_oauth2
