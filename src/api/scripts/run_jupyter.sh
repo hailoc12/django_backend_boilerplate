@@ -1,1 +1,1 @@
-docker compose -f production.yml run django python3 /app/manage.py shell_plus --notebook 
+docker compose -f production.yml  run django python /app/manage.py shell_plus --notebook

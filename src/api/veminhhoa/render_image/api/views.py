@@ -4,9 +4,10 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from veminhhoa.render_image.business import RenderManager
-from veminhhoa.render_image.models import RenderTemplate, RenderTransaction
-from veminhhoa.render_image.serializers import RenderTemplateSerializer, RenderTransactionSerializer
+from veminhhoa.render_image.models import RenderTemplate, RenderTransaction, Book, Author, Order
+from veminhhoa.render_image.serializers import RenderTemplateSerializer, RenderTransactionSerializer, BookSerializer, AuthorSerializer, OrderSerializer
 import json
+from django.db.models import Sum
 
 class RenderImageFromPromptView(APIView):
     def post(self, request):
@@ -87,9 +88,32 @@ class RenderTemplateViewset(viewsets.ReadOnlyModelViewSet):
     serializer_class = RenderTemplateSerializer
     queryset = RenderTemplate.objects.all()
 
-class RenderTransactionViewset(viewsets.ReadOnlyModelViewSet):
+class RenderTransactionViewset(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return RenderTransaction.objects.filter(user=user).all().order_by('-pk')
     serializer_class = RenderTransactionSerializer
 
+class BookViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    serializer_class = BookSerializer
+    def get_queryset(self):
+        return Book.objects.all() 
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    serializer_class = AuthorSerializer
+    def get_queryset(self):
+        return Author.objects.all()
+
+class OrderViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    serializer_class = OrderSerializer
+    def get_queryset(self):
+        return Order.objects.all()
+
+class GetBestAuthorView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        best_authors = Author.objects.filter(books__orders__isnull=False).annotate(revenue = Sum('books__orders__price')).order_by('-revenue').values('pk', 'name', 'revenue')
+        return Response(best_authors, 200)
