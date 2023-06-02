@@ -1,1 +1,0 @@
-sudo docker-compose -f production.yml run django pytest -v -s --tb=long /app/veminhhoa/render_image/tests/test_stable_diffusion.py
